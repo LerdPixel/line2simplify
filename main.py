@@ -36,8 +36,14 @@ class Order2line:
                 if self.factors[1] * math.sin(self.phi2) + (self.factors[0] - self.factors[2]) * math.cos(self.phi2) / 2 + (self.factors[0] + self.factors[2]) / 2 != 0:
                     self.phi2 += math.pi
                 self.phi = self.phi2 / 2
-                self.factors1 = [self.factors[1] * math.sin(self.phi2) + (self.factors[0] - self.factors[2]) * math.cos(self.phi2) / 2 + (self.factors[0] + self.factors[2]) / 2, 0, - self.factors[1] * math.sin(self.phi2) - (self.factors[0] - self.factors[2]) * math.cos(self.phi2) / 2 + (self.factors[0] + self.factors[2]) / 2, self.factors[3] * math.cos(self.phi2) + self.factors[4] * math.sin(self.phi2), self.factors[4] * math.cos(self.phi2) - self.factors[3] * math.sin(self.phi2), self.factors[5]]
+                self.factors1 = [self.factors[1] * math.sin(self.phi2) + (self.factors[0] - self.factors[2]) * math.cos(self.phi2) / 2 + (self.factors[0] + self.factors[2]) / 2, 0, - self.factors[1] * math.sin(self.phi2) - (self.factors[0] - self.factors[2]) * math.cos(self.phi2) / 2 + (self.factors[0] + self.factors[2]) / 2, self.factors[3] * math.cos(self.phi) + self.factors[4] * math.sin(self.phi), self.factors[4] * math.cos(self.phi) - self.factors[3] * math.sin(self.phi), self.factors[5]]
             self.factors2 = [0, 0, self.i1, self.factors1[3], 0, self.factors[5] - self.factors1[4]**2 / self.i1]
+
+    def inf_message(self):
+        self.intr(self.factors)
+        print('I1 = ', self.i1, 'I2 = ', self.i2, 'I3 = ', self.i3)
+        print('type = ', self.type)
+        print()
     def intr(self, fac):
         variables = ['x^2', 'x*y', 'y^2', 'x', 'y', '']
         for i in range(6):
@@ -51,5 +57,5 @@ class Order2line:
 
 
 a = Order2line([9, -24, 16, -20, 110, -50])
-print(a.factors1)
-a.intr(a.factors1)
+print(a.factors2)
+a.intr(a.factors2)
